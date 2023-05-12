@@ -1,27 +1,26 @@
 import { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, Image } from 'react-native';
-import { ScrollView, TouchableOpacity } from 'react-native-web';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import * as Linking from 'expo-linking';
 import Prod from '../components/Prod';
 
 export default function Produto({ route }) {
     const [produto, setProduto] = useState([]);
 
-    useEffect(() => {
-        function carregarProduto() {
-            const options = { method: 'GET' };
+    // useEffect(() => {
+    //     function carregarProduto() {
+    //         const options = { method: 'GET' };
 
-            fetch('http://localhost:5000/produto', options)
-                .then(response => response.json())
-                .then(resp => {
-                    setProduto(resp)
-                })
-        }
+    //         fetch('http://localhost:5000/produto', options)
+    //             .then(response => response.json())
+    //             .then(resp => {
+    //                 setProduto(resp)
+    //             })
+    //     }
 
-        setTimeout(() => {
-            carregarProduto()
-        }, 500)
-    }, [produto])
+    //     setTimeout(() => {
+    //         carregarProduto()
+    //     }, 500)
+    // }, [produto])
 
     return (
         <View style={styles.v} >
@@ -47,7 +46,7 @@ const styles = StyleSheet.create({
     viBTN: {
         display: "flex",
         flexDirection: "row",
-        gap: "30px"
+        gap: 30
     },
     v: {
         display: "flex",
@@ -72,39 +71,39 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         borderColor: "Black",
-        borderWidth: "1px",
-        borderRadius: "10px"
+        borderWidth: 1,
+        borderRadius: 10
     },
     te: {
-        fontSize: "10pt"
+        fontSize: 10
     },
     veic: {
         width: "100%",
-        height: "250px",
+        height: 250,
         backgroundColor: "#ffffff",
         display: "flex",
         justifyContent: "space-between",
         flexDirection: "row",
-        padding: "20px",
+        padding: 20,
         alignItems: "center",
-        borderRadius: "10px",
-        marginBottom: "30px"
+        borderRadius: 10,
+        marginBottom: 30
     },
     veicL: {
         maxWidth: "78%"
     },
     info: {
-        fontSize: "13pt",
+        fontSize: 13,
         fontWeight: "bold",
         color: "#000000"
     },
     infoP: {
-        fontSize: "11pt",
+        fontSize: 11,
         fontWeight: "normal",
         color: "#000"
     },
     text: {
-        fontSize: "30pt",
+        fontSize: 30,
         color: "#2f8f5b"
     },
     textBt: {

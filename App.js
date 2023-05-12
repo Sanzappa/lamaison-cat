@@ -11,8 +11,9 @@ export default function App() {
   return (
     <NavigationContainer independent={true}>
       <Stack.Navigator>
+      <Stack.Screen name="Produtos" component={produtos} options={{ headerShown: false }}/>
         <Stack.Screen name="Login" component={login} options={{ headerShown: false }}/>
-        <Stack.Screen name="Produtos" component={produtos} options={{ headerShown: false }}/>
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

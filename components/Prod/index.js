@@ -1,5 +1,4 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
-import { TextInput } from 'react-native-web';
 import { useEffect, useState } from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
@@ -34,7 +33,7 @@ const styles = StyleSheet.create({
     viBTN: {
         display: "flex",
         flexDirection: "row",
-        gap: "30px"
+        gap: 30
     },
     v: {
         display: "flex",
@@ -59,39 +58,39 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center",
         borderColor: "Black",
-        borderWidth: "1px",
-        borderRadius: "10px"
+        borderWidth: 1,
+        borderRadius: 10
     },
     te: {
-        fontSize: "10pt"
+        fontSize: 10
     },
     veic: {
         width: "100%",
-        height: "250px",
+        height: 250,
         backgroundColor: "#ffffff",
         display: "flex",
         justifyContent: "space-between",
         flexDirection: "row",
-        padding: "20px",
+        padding: 20,
         alignItems: "center",
-        borderRadius: "10px",
-        marginBottom: "30px"
+        borderRadius: 10,
+        marginBottom: 30
     },
     veicL: {
         maxWidth: "78%"
     },
     info: {
-        fontSize: "13pt",
+        fontSize: 13,
         fontWeight: "bold",
         color: "#000000"
     },
     infoP: {
-        fontSize: "11pt",
+        fontSize: 11,
         fontWeight: "normal",
         color: "#000"
     },
     text: {
-        fontSize: "30pt",
+        fontSize: 30,
         color: "#2f8f5b"
     },
     textBt: {
