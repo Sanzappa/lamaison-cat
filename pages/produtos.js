@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { View, Text, StyleSheet, Image } from 'react-native';
 import { ScrollView, TouchableOpacity } from 'react-native-web';
+import * as Linking from 'expo-linking';
 import Prod from '../components/Prod';
 
 export default function Produto({ route }) {
@@ -25,6 +26,9 @@ export default function Produto({ route }) {
     return (
         <View style={styles.v} >
             <Text style={styles.text} >Produtos</Text>
+            <TouchableOpacity onPress={() => {Linking.openURL('lmscan://lmscan')}}>
+                <Text>Mim clica</Text>
+            </TouchableOpacity>
             <ScrollView>
                 
                 {
