@@ -4,28 +4,17 @@ import { useEffect, useState } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 export default function Prod(props) {
-    const [image, setImage] = useState(null)
-
     const produto = props
 
-    useEffect(() => {
-        fetch('http://localhost:5000/arquivos/' + produto.imagem , {method: 'GET'})
-        .then(response => response.blob())
-        .then(response => {
-            const objectURL = URL.createObjectURL(response);
-            setImage(objectURL)
-        })
-    }, [])
-
     return (
-        <View style={styles.veic}>
+        <TouchableOpacity onPress={props.onPress} style={styles.veic}>
             <View style={styles.veicL} >
                 <Text style={styles.info}>Nome : {produto.nome}</Text>
                 <Text style={styles.info}>Valor : {produto.valor}</Text>
                 <Text style={styles.info}>Descrição : {produto.descricao}</Text>
-                <Image source={image === null ? {uri: ""} : {uri: image}} style={{ width: 100, height: 100 }} /> 
+                <Image source={{uri: props.imagem}} style={{ width: 100, height: 100 }} /> 
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 

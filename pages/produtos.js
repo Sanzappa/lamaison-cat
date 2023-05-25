@@ -1,42 +1,75 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
 import * as Linking from 'expo-linking';
+import { useFonts } from 'expo-font'
+import * as SplashScreen from 'expo-splash-screen';
 import Prod from '../components/Prod';
 
+SplashScreen.preventAutoHideAsync();
 export default function Produto({ route }) {
     const [produto, setProduto] = useState([]);
+    const [pages, setPages] = useState([])
+    const [curPage, setCurPage] = useState(1)
 
-    // useEffect(() => {
-    //     function carregarProduto() {
-    //         const options = { method: 'GET' };
+    useEffect(() => {
+        function carregarProduto() {
+            const options = { method: 'GET' };
 
-    //         fetch('http://localhost:5000/produto', options)
-    //             .then(response => response.json())
-    //             .then(resp => {
-    //                 setProduto(resp)
-    //             })
-    //     }
+            fetch('https://lamaison.glitch.me/produto/page/' + curPage, options)
+                .then(response => response.json())
+                .then(resp => {
+                    setProduto(resp.produtos)
+                    let aux = []
+                    for (let i = 1; i <= Math.ceil(resp.count / 15); i++) {
+                        aux.push(i)
+                    }
+                    setPages(aux)
+                })
+        }
+        carregarProduto()
+        // setTimeout(() => {
+        //     carregarProduto()
+        // }, 500)
+    }, [curPage])
 
-    //     setTimeout(() => {
-    //         carregarProduto()
-    //     }, 500)
-    // }, [produto])
+    const [fontsLoaded] = useFonts({
+        'kaneda_gothic': require('./font/kaneda/kaneda-gothic-regular-webfont.woff'),
+      });
+    
+      const onLayoutRootView = useCallback(async () => {
+        if (fontsLoaded) {
+          await SplashScreen.hideAsync();
+        }
+      }, [fontsLoaded]);
+    
+      if (!fontsLoaded) {
+        return null;
+      }
 
     return (
-        <View style={styles.v} >
+        <View style={styles.v} onLayout={onLayoutRootView}>
             <Text style={styles.text} >Produtos</Text>
-            <TouchableOpacity onPress={() => {Linking.openURL('lmscan://lmscan')}}>
-                <Text>Mim clica</Text>
-            </TouchableOpacity>
             <ScrollView>
                 
                 {
                     produto.map((produto, index) => {
                         return (
-                            <Prod key={index} imagem={produto.imagem} nome={produto.nome} valor={produto.valor} descricao={produto.descricao} />
+                            <Prod onPress={() => {Linking.openURL('lmscan://lmscan?id=' + produto.id)}} key={index} imagem={"https://lamaisontest.blob.core.windows.net/arquivos/" + produto.imagem} nome={produto.nome} valor={produto.valor} descricao={produto.descricao} />
                         )
                     })
                 }
+                <View style={{width: '100%', display: 'flex', justifyContent: 'center', flexDirection: 'row'}}>
+                    {
+                        pages.map((page, index) => {
+                            return(
+                                <TouchableOpacity onPress={() => setCurPage(Number(page))} key={index} style={{marginLeft: index === 0 ? 0 : 10, padding: 10}}>
+                                    <Text style={{fontSize: 20, textDecorationLine: curPage === page ? 'underline' : 'none'}}>{page}</Text>
+                                </TouchableOpacity>
+                            )
+                        })
+                        
+                    }
+                </View>
             </ScrollView>
         </View>
     )
