@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export default function telaLogin({ navigation }) {
+export default function TelaLogin({ navigation }) {
 
     const [email, setEmail] = useState("")
     const [senha, setSenha] = useState("")

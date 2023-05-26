@@ -33,7 +33,7 @@ export default function Produto({ route }) {
     }, [curPage])
 
     const [fontsLoaded] = useFonts({
-        'kaneda_gothic': require('./font/kaneda/kaneda-gothic-regular-webfont.woff'),
+        'kaneda_gothic': require('./font/kaneda/kaneda-gothic-regular-webfont.otf'),
       });
     
       const onLayoutRootView = useCallback(async () => {
@@ -48,8 +48,8 @@ export default function Produto({ route }) {
 
     return (
         <View style={styles.v} onLayout={onLayoutRootView}>
-            <Text style={styles.text} >Produtos</Text>
-            <ScrollView>
+            <Text style={styles.text} >Catálogo de Produtos</Text>
+            <ScrollView style={styles.sv}>
                 
                 {
                     produto.map((produto, index) => {
@@ -85,14 +85,14 @@ const styles = StyleSheet.create({
         display: "flex",
         alignItems: "center",
         flexDirection: "column",
-        backgroundColor: "#dce5fd",
+        backgroundColor: "#fff",
         width: "100%",
         flex: 1,
-        padding: 20
+        padding: 15,
+        paddingTop: 50
     },
     sv: {
         height: "100%",
-        backgroundColor: "#46589c",
         width: "100%",
     },
     btn: {
@@ -136,8 +136,10 @@ const styles = StyleSheet.create({
         color: "#000"
     },
     text: {
-        fontSize: 30,
-        color: "#2f8f5b"
+        fontSize: 36,
+        color: "#000",
+        fontFamily: 'kaneda_gothic',
+        padding: 10
     },
     textBt: {
         color: "#fff"

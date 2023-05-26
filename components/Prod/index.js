@@ -1,18 +1,22 @@
 import { StyleSheet, Text, TouchableOpacity, View, Image } from 'react-native';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
+import { useFonts } from 'expo-font'
+import * as SplashScreen from 'expo-splash-screen';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
+SplashScreen.preventAutoHideAsync();
 
 export default function Prod(props) {
     const produto = props
 
     return (
-        <TouchableOpacity onPress={props.onPress} style={styles.veic}>
+        <TouchableOpacity onPress={props.onPress} style={{...styles.veic, borderTopColor: 'black', borderTopWidth: 1}}>
+            <Image source={{uri: props.imagem}} style={{ width: 150, height: 250 }} /> 
             <View style={styles.veicL} >
-                <Text style={styles.info}>Nome : {produto.nome}</Text>
-                <Text style={styles.info}>Valor : {produto.valor}</Text>
-                <Text style={styles.info}>Descrição : {produto.descricao}</Text>
-                <Image source={{uri: props.imagem}} style={{ width: 100, height: 100 }} /> 
+                <View style={{flexShrink: 1}}>
+                    <Text style={styles.info}>{produto.nome}</Text>
+                </View>
+                <Text style={{...styles.info, fontSize: 50}}>{produto.valor}</Text>
             </View>
         </TouchableOpacity>
     )
@@ -55,23 +59,23 @@ const styles = StyleSheet.create({
     },
     veic: {
         width: "100%",
-        height: 250,
         backgroundColor: "#ffffff",
         display: "flex",
         justifyContent: "space-between",
         flexDirection: "row",
-        padding: 20,
+        paddingVertical: 30,
         alignItems: "center",
-        borderRadius: 10,
-        marginBottom: 30
     },
     veicL: {
-        maxWidth: "78%"
+        flex: 1,
+        padding: 20,
+        flexWrap: 'wrap'
     },
     info: {
-        fontSize: 13,
-        fontWeight: "bold",
-        color: "#000000"
+        fontSize: 30,
+        color: "#000000",
+        fontFamily: 'kaneda_gothic',
+        flexWrap: 'wrap'
     },
     infoP: {
         fontSize: 11,
@@ -79,7 +83,7 @@ const styles = StyleSheet.create({
         color: "#000"
     },
     text: {
-        fontSize: 30,
+        fontSize: 45,
         color: "#2f8f5b"
     },
     textBt: {
