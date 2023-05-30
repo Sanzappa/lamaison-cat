@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from 'react';
-import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, Image, ScrollView, TouchableOpacity, ToastAndroid } from 'react-native';
 import * as Linking from 'expo-linking';
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen';
@@ -46,6 +46,19 @@ export default function Produto({ route }) {
         return null;
       }
 
+    const openLink = (produto) =>{
+        fetch("https://lamaison.glitch.me/produto/" + produto.id, {method: 'GET'})
+        .then(response => response.json())
+        .then(async response => {
+            if (response.textura !== null) {
+                await Linking.openURL('lmscan://lmscan?id=' + produto.id)
+            } else {
+                ToastAndroid.show('Modelo indisponível para o produto de id ' + produto.id, ToastAndroid.SHORT)
+            }
+        })
+        
+    }
+
     return (
         <View style={styles.v} onLayout={onLayoutRootView}>
             <Text style={styles.text} >Catálogo de Produtos</Text>
@@ -54,7 +67,7 @@ export default function Produto({ route }) {
                 {
                     produto.map((produto, index) => {
                         return (
-                            <Prod onPress={() => {Linking.openURL('lmscan://lmscan?id=' + produto.id)}} key={index} imagem={"https://lamaisontest.blob.core.windows.net/arquivos/" + produto.imagem} nome={produto.nome} valor={produto.valor} descricao={produto.descricao} />
+                            <Prod onPress={() => openLink(produto)} key={index} imagem={"https://lamaisontest.blob.core.windows.net/arquivos/" + produto.imagem} nome={produto.nome} valor={produto.valor} descricao={produto.descricao} />
                         )
                     })
                 }
