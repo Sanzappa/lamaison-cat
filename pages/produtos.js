@@ -6,7 +6,7 @@ import * as SplashScreen from 'expo-splash-screen';
 import Prod from '../components/Prod';
 
 SplashScreen.preventAutoHideAsync();
-export default function Produto({ route }) {
+export default function Produto({ navigation }) {
     const [produto, setProduto] = useState([]);
     const [pages, setPages] = useState([])
     const [curPage, setCurPage] = useState(1)
@@ -46,28 +46,14 @@ export default function Produto({ route }) {
         return null;
       }
 
-    const openLink = (produto) =>{
-        fetch("https://lamaison.glitch.me/produto/" + produto.id, {method: 'GET'})
-        .then(response => response.json())
-        .then(async response => {
-            if (response.textura !== null) {
-                await Linking.openURL('lmscan://lmscan?id=' + produto.id)
-            } else {
-                ToastAndroid.show('Modelo indisponível para o produto de id ' + produto.id, ToastAndroid.SHORT)
-            }
-        })
-        
-    }
-
     return (
         <View style={styles.v} onLayout={onLayoutRootView}>
-            <Text style={styles.text} >Catálogo de Produtos</Text>
             <ScrollView style={styles.sv}>
                 
                 {
                     produto.map((produto, index) => {
                         return (
-                            <Prod onPress={() => openLink(produto)} key={index} imagem={"https://lamaisontest.blob.core.windows.net/arquivos/" + produto.imagem} nome={produto.nome} valor={produto.valor} descricao={produto.descricao} />
+                            <Prod onPress={() => navigation.navigate('Produto', {produto})} key={index} imagem={"https://lamaisontest.blob.core.windows.net/arquivos/" + produto.imagem} nome={produto.nome} valor={produto.valor} descricao={produto.descricao} desconto={produto.desconto} />
                         )
                     })
                 }
@@ -150,7 +136,7 @@ const styles = StyleSheet.create({
     },
     text: {
         fontSize: 36,
-        color: "#000",
+        color: "#fff",
         fontFamily: 'kaneda_gothic',
         padding: 10
     },

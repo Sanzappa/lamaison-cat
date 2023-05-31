@@ -11,12 +11,13 @@ export default function Prod(props) {
 
     return (
         <TouchableOpacity onPress={props.onPress} style={{...styles.veic, borderTopColor: 'black', borderTopWidth: 1}}>
-            <Image source={{uri: props.imagem}} style={{ width: 150, height: 250 }} /> 
+            <Image source={{uri: props.imagem, height: 120, width: 80}} /> 
             <View style={styles.veicL} >
                 <View style={{flexShrink: 1}}>
                     <Text style={styles.info}>{produto.nome}</Text>
                 </View>
-                <Text style={{...styles.info, fontSize: 50}}>{produto.valor}</Text>
+                {produto.desconto > 0 && <Text style={{textDecorationLine: 'line-through', fontSize: 22}}>R$ {(produto.valor).toFixed(2).replace('.',',')}</Text>}
+                <Text style={{...styles.info, fontSize: 50}}>R$ {(produto.valor - produto.valor * produto.desconto / 100).toFixed(2).replace('.',',')}</Text>
             </View>
         </TouchableOpacity>
     )
