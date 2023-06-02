@@ -15,7 +15,7 @@ export default function Produto({ navigation }) {
         function carregarProduto() {
             const options = { method: 'GET' };
 
-            fetch('https://lamaison.glitch.me/produto/page/' + curPage, options)
+            fetch('https://lamaison.glitch.me/produto/page/' + curPage + '?np=12', options)
                 .then(response => response.json())
                 .then(resp => {
                     setProduto(resp.produtos)
@@ -49,7 +49,7 @@ export default function Produto({ navigation }) {
     return (
         <View style={styles.v} onLayout={onLayoutRootView}>
             <ScrollView style={styles.sv}>
-                
+                <View style={{width: '100%', flexDirection: 'row', flexWrap: 'wrap'}}>
                 {
                     produto.map((produto, index) => {
                         return (
@@ -57,6 +57,7 @@ export default function Produto({ navigation }) {
                         )
                     })
                 }
+                </View>
                 <View style={{width: '100%', display: 'flex', justifyContent: 'center', flexDirection: 'row'}}>
                     {
                         pages.map((page, index) => {

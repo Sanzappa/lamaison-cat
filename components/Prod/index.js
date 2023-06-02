@@ -10,11 +10,11 @@ export default function Prod(props) {
     const produto = props
 
     return (
-        <TouchableOpacity onPress={props.onPress} style={{...styles.veic, borderTopColor: 'black', borderTopWidth: 1}}>
+        <TouchableOpacity onPress={props.onPress} style={{...styles.veic, borderBottomColor: 'black', borderBottomWidth: 1}}>
             <Image source={{uri: props.imagem, height: 120, width: 80}} /> 
             <View style={styles.veicL} >
                 <View style={{flexShrink: 1}}>
-                    <Text style={styles.info}>{produto.nome}</Text>
+                    <Text numberOfLines={1} ellipsizeMode='tail' style={styles.info}>{produto.nome}</Text>
                 </View>
                 {produto.desconto > 0 && <Text style={{textDecorationLine: 'line-through', fontSize: 22}}>R$ {(produto.valor).toFixed(2).replace('.',',')}</Text>}
                 <Text style={{...styles.info, fontSize: 50}}>R$ {(produto.valor - produto.valor * produto.desconto / 100).toFixed(2).replace('.',',')}</Text>
@@ -59,11 +59,10 @@ const styles = StyleSheet.create({
         fontSize: 10
     },
     veic: {
-        width: "100%",
+        width: "50%",
         backgroundColor: "#ffffff",
         display: "flex",
         justifyContent: "space-between",
-        flexDirection: "row",
         paddingVertical: 30,
         alignItems: "center",
     },
