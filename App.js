@@ -30,7 +30,7 @@ export default function App() {
     <NavigationContainer independent={true}>
       <Stack.Navigator>
       <Stack.Screen name="Produtos" component={Produtos} options={{ headerShown: true, headerTitle: "Catálogo de Produtos", headerStyle: {backgroundColor: 'black'}, headerTitleStyle: {color: 'white', fontFamily: 'kaneda_gothic', fontSize: 40} }}/>
-      <Stack.Screen name="Produto" component={Prod} options={{ headerShown: true, headerTitle: "Produto", headerStyle: {backgroundColor: 'black'}, headerTitleStyle: {color: 'white', fontFamily: 'kaneda_gothic', fontSize: 40} }}/>
+      <Stack.Screen name="Produto" component={Prod} options={{ headerShown: true, headerTitle: "Produto", headerStyle: {backgroundColor: 'black'}, headerTitleStyle: {color: 'white', fontFamily: 'kaneda_gothic', fontSize: 40}, headerTintColor: 'white' }}/>
         <Stack.Screen name="Login" component={Login} options={{ headerShown: false }}/>
         
       </Stack.Navigator>

@@ -10,10 +10,10 @@ export default function Prod(props) {
     const produto = props
 
     return (
-        <TouchableOpacity onPress={props.onPress} style={{...styles.veic, borderBottomColor: 'black', borderBottomWidth: 1}}>
-            <Image source={{uri: props.imagem, height: 120, width: 80}} /> 
+        <TouchableOpacity onPress={props.onPress} style={{...styles.veic, borderBottomColor: 'black', marginBottom: 15, paddingTop: 0}}>
+            <Image source={{uri: props.imagem, height: 160, width: "100%"}} /> 
             <View style={styles.veicL} >
-                <View style={{flexShrink: 1}}>
+                <View style={{flexShrink: 1, width: '100%'}}>
                     <Text numberOfLines={1} ellipsizeMode='tail' style={styles.info}>{produto.nome}</Text>
                 </View>
                 {produto.desconto > 0 && <Text style={{textDecorationLine: 'line-through', fontSize: 22}}>R$ {(produto.valor).toFixed(2).replace('.',',')}</Text>}
@@ -36,7 +36,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#dce5fd",
         width: "100%",
         flex: 1,
-        padding: 20
+        padding: 5
     },
     sv: {
         height: "100%",
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
         fontSize: 10
     },
     veic: {
-        width: "50%",
+        width: "48%",
         backgroundColor: "#ffffff",
         display: "flex",
         justifyContent: "space-between",
@@ -69,7 +69,9 @@ const styles = StyleSheet.create({
     veicL: {
         flex: 1,
         padding: 20,
-        flexWrap: 'wrap'
+        flexWrap: 'wrap',
+        alignItems: 'flex-start',
+        width: "100%"
     },
     info: {
         fontSize: 30,
