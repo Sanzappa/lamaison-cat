@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Catálogo LaMaison",
-    "slug": "lamaisonCat",
+    "slug": "lamaison-cat",
     "version": "1.0.0",
     "githubUrl": "https://github.com/sanzappa/lamaison-cat",
     "primaryColor": "#000000",

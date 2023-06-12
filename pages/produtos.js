@@ -23,7 +23,7 @@ export default function Produto({ navigation }) {
                 .then(resp => {
                     setProduto(resp.produtos)
                     let aux = []
-                    for (let i = 1; i <= Math.ceil(resp.count / 15); i++) {
+                    for (let i = 1; i <= Math.ceil(resp.count / 12); i++) {
                         aux.push(i)
                     }
                     setPages(aux)

@@ -1,10 +1,10 @@
 import { useState, useCallback, useRef, createRef } from 'react';
-import { View, Text, StyleSheet, Image, TouchableHighlight, TouchableOpacity, ToastAndroid, Animated, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, Image, TouchableHighlight, TouchableOpacity, ToastAndroid, Animated } from 'react-native';
 import * as Linking from 'expo-linking';
 import { useFonts } from 'expo-font'
 import * as SplashScreen from 'expo-splash-screen';
 import { AntDesign } from '@expo/vector-icons';
-import { GestureHandlerRootView, PanGestureHandler, PinchGestureHandler, State } from 'react-native-gesture-handler';
+import { GestureHandlerRootView, PanGestureHandler, PinchGestureHandler, ScrollView, State } from 'react-native-gesture-handler';
 
 
 
@@ -127,20 +127,24 @@ export default function Prod({ route }) {
                     </PanGestureHandler>
                     <AntDesign name="close" size={24} color="white" style={{position: 'absolute', top: 5, right: 5}} onPress={() => setVisible(false)}/>
                 </View>
-                <TouchableHighlight onPress={() => setVisible(true)}>
-                    <Image source={{ uri: "https://lamaisontest.blob.core.windows.net/arquivos/" + route.params.produto.imagem, height: 400, width: 500 }} style={{ resizeMode: 'cover' }} />
-                </TouchableHighlight>
-                <View style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: 15 }}>
-                    <Text style={{ fontSize: 38, fontFamily: 'kaneda_gothic', width: '100%', textAlign: 'center' }}>{route.params.produto.nome}</Text>
-                    <Text style={{ fontFamily: 'kaneda_gothic', fontSize: 24 }}>{route.params.produto.descricao}</Text>
-                    {route.params.produto.desconto > 0 && <Text style={{ fontFamily: 'kaneda_gothic', opacity: .5, textDecorationLine: 'line-through', fontSize: 28 }}>R$ {(route.params.produto.valor).toFixed(2).replace('.', ',')}</Text>}
-                    <Text style={{ fontFamily: 'kaneda_gothic', fontSize: 50 }}>R$ {(route.params.produto.valor - route.params.produto.valor * route.params.produto.desconto / 100).toFixed(2).replace('.', ',')}</Text>
-                    <View style={{ flex: 1, justifyContent: 'flex-end', paddingVertical: 10 }}>
-                        <TouchableOpacity onPress={openLink} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'black' }}>
-                            <Text style={{ color: 'white', fontFamily: 'kaneda_gothic', fontSize: 38, padding: 10 }}>Projetar Realidade Aumentada</Text>
-                        </TouchableOpacity>
+                <ScrollView style={{width: '100%'}}>
+                    <TouchableHighlight style={{width: '100%', alignItems: 'center'}} onPress={() => setVisible(true)}>
+                        <Image source={{ uri: "https://lamaisontest.blob.core.windows.net/arquivos/" + route.params.produto.imagem, height: 400, width: 500 }} style={{ resizeMode: 'cover' }} />
+                    </TouchableHighlight>
+                    <View style={{ flex: 1, display: 'flex', flexDirection: 'column', padding: 15 }}>
+                        
+                            <Text style={{ fontSize: 38, fontFamily: 'kaneda_gothic', width: '100%', textAlign: 'center' }}>{route.params.produto.nome}</Text>
+                            <Text style={{ fontFamily: 'kaneda_gothic', fontSize: 24 }}>{route.params.produto.descricao}</Text>
+                            {route.params.produto.desconto > 0 && <Text style={{ fontFamily: 'kaneda_gothic', opacity: .5, textDecorationLine: 'line-through', fontSize: 28 }}>R$ {(route.params.produto.valor).toFixed(2).replace('.', ',')}</Text>}
+                            <Text style={{ fontFamily: 'kaneda_gothic', fontSize: 50 }}>R$ {(route.params.produto.valor - route.params.produto.valor * route.params.produto.desconto / 100).toFixed(2).replace('.', ',')}</Text>
+                            <View style={{ flex: 1, justifyContent: 'flex-end', paddingVertical: 10 }}>
+                                <TouchableOpacity onPress={openLink} style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'black' }}>
+                                    <Text style={{ color: 'white', fontFamily: 'kaneda_gothic', fontSize: 38, padding: 10 }}>Projetar Realidade Aumentada</Text>
+                                </TouchableOpacity>
+                            </View>
+                        
                     </View>
-                </View>
+                </ScrollView>
 
 
             </View>
